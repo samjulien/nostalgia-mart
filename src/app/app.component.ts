@@ -6,7 +6,14 @@ import { Component } from '@angular/core';
     <h1>Nostalgia Mart</h1>
     <router-outlet></router-outlet>
   `,
-  styles: []
+  styles: [
+    `
+      h1 {
+        font-family: 'Press Start 2P', cursive;
+        text-align: center;
+      }
+    `,
+  ],
 })
 export class AppComponent {
   title = 'Nostalgia Mart';

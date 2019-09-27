@@ -1,17 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { VideoGamesService } from '@nostalgia-mart/core/services';
 
 @Component({
   selector: 'nm-games-list',
   template: `
-    <h2>Game List</h2>
-    <nm-game-card></nm-game-card>
-    <nm-game-card></nm-game-card>
-    <nm-game-card></nm-game-card>
+    <nm-game-card
+      *ngFor="let game of games$ | async"
+      [game]="game"
+    ></nm-game-card>
   `,
-  styles: [],
+  styles: [
+    `
+      :host {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    `,
+  ],
 })
 export class GamesListComponent implements OnInit {
-  constructor() {}
+  games$;
+  constructor(private videoGamesService: VideoGamesService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.games$ = this.videoGamesService.getSnesGames();
+  }
 }
