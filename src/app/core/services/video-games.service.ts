@@ -13,4 +13,8 @@ export class VideoGamesService {
   getSnesGames() {
     return this.http.get(`${this.API_URL}/games/snes`);
   }
+
+  getNesGames() {
+    return this.http.get(`${this.API_URL}/games/nes`);
+  }
 }

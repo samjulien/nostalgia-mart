@@ -1,5 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@angular/material/prebuilt-themes/purple-green.css';
+@import '~@angular/material/theming';
+
+$custom-typography: mat-typography-config(
+  $font-family: '"Work Sans", sans-serif;',
+);
+@include mat-core($custom-typography);
 
 html,
 body {
@@ -7,5 +13,5 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: 'Work Sans', 'Helvetica Neue', sans-serif;
 }

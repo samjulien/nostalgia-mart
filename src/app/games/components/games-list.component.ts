@@ -1,13 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { VideoGamesService } from '@nostalgia-mart/core/services';
 
 @Component({
   selector: 'nm-games-list',
   template: `
-    <nm-game-card
-      *ngFor="let game of games$ | async"
-      [game]="game"
-    ></nm-game-card>
+    <nm-game-card *ngFor="let game of games" [game]="game"></nm-game-card>
   `,
   styles: [
     `
@@ -20,10 +17,8 @@ import { VideoGamesService } from '@nostalgia-mart/core/services';
   ],
 })
 export class GamesListComponent implements OnInit {
-  games$;
+  @Input() games;
   constructor(private videoGamesService: VideoGamesService) {}
 
-  ngOnInit() {
-    this.games$ = this.videoGamesService.getSnesGames();
-  }
+  ngOnInit() {}
 }

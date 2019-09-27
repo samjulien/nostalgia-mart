@@ -82,7 +82,9 @@ export class GameCardComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.game.excerpt = this.game.summary.substring(0, 200) + '...';
+    this.game.excerpt = this.game.summary
+      ? this.game.summary.substring(0, 200) + '...'
+      : 'No summary available.';
     this.imageStyles = {
       'background-image':
         'url(' +
