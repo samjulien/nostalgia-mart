@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Game } from '../models/game';
 
 @Component({
   selector: 'nm-game-card',
@@ -13,14 +14,7 @@ import { Component, OnInit, Input } from '@angular/core';
           Rating: {{ game.rating | number: '1.0-1' }}
         </mat-card-subtitle>
       </mat-card-header>
-      <img
-        mat-card-image
-        [src]="
-          'https://images.igdb.com/igdb/image/upload/t_original/' +
-          game.screenshot.image_id +
-          '.jpg'
-        "
-      />
+      <img mat-card-image [src]="game.screenshotUrl" />
       <mat-card-content>
         <p>{{ game.excerpt }}</p>
       </mat-card-content>
@@ -77,25 +71,14 @@ import { Component, OnInit, Input } from '@angular/core';
   ],
 })
 export class GameCardComponent implements OnInit {
-  @Input() game;
+  @Input() game: Game;
   imageStyles = {};
   constructor() {}
 
   ngOnInit() {
-    this.game.excerpt = this.game.summary
-      ? this.game.summary.substring(0, 200) + '...'
-      : 'No summary available.';
     this.imageStyles = {
-      'background-image':
-        'url(' +
-        `https://images.igdb.com/igdb/image/upload/t_original/${this.game.cover.image_id}.jpg` +
-        ')',
+      'background-image': 'url(' + this.game.coverUrl + ')',
       'background-size': 'cover',
     };
-    this.game.screenshot = this.game.screenshots.filter(pic => {
-      if (pic.height / pic.width <= 1) {
-        return pic;
-      }
-    })[0];
   }
 }

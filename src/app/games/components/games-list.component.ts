@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { VideoGamesService } from '@nostalgia-mart/core/services';
 
 @Component({
   selector: 'nm-games-list',
@@ -18,7 +17,7 @@ import { VideoGamesService } from '@nostalgia-mart/core/services';
 })
 export class GamesListComponent implements OnInit {
   @Input() games;
-  constructor(private videoGamesService: VideoGamesService) {}
+  constructor() {}
 
   ngOnInit() {}
 }
