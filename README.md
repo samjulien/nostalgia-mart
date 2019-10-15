@@ -1,4 +1,5 @@
 # NostalgiaMart
+This is a sample app I'm building for various NgRx content I'm making.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.6.
 

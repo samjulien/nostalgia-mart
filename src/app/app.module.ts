@@ -7,6 +7,10 @@ import { GamesModule } from '@nostalgia-mart/games';
 import { CoreModule } from '@nostalgia-mart/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from '@nostalgia-mart/effects/app.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +21,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     GamesModule,
     CoreModule,
     BrowserAnimationsModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+      },
+    }),
+    EffectsModule.forRoot([AppEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],
