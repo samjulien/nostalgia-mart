@@ -19,11 +19,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-// app.use(express.static(__dirname + '/public'));
 app.set('port', process.env.PORT || 5000);
-// app.get('*', function(req, res) {
-//   res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
-// });
 
 app.get('/api/games/snes', function(req, res) {
   unirest
@@ -63,36 +59,23 @@ app.get('/api/games/nes', function(req, res) {
     });
 });
 
-// app.post('/singlegame', function(req, res) {
-//   console.log(req.body.id);
-//   unirest
-//     .get(
-//       'https://igdbcom-internet-game-database-v1.p.mashape.com/games/' +
-//         req.body.id +
-//         '?fields=*'
-//     )
-//     .header('user-key', USER_KEY)
-//     .header('Accept', 'application/json')
-//     .end(function(result) {
-//       console.log(result.status, result.body);
-//       res.send(result.body);
-//     });
-// });
-
-// app.post('/company', function(req, res) {
-//   unirest
-//     .get(
-//       'https://igdbcom-internet-game-database-v1.p.mashape.com/companies/' +
-//         req.body.companyId +
-//         '?fields=name'
-//     )
-//     .header('user-key', USER_KEY)
-//     .header('Accept', 'application/json')
-//     .end(function(result) {
-//       console.log(result.status, result.body);
-//       res.send(result.body);
-//     });
-// });
+app.get('/api/games/:id', function(req, res) {
+  const id = req.params.id;
+  unirest
+    .post(`${IDBG_ROOT}/games`)
+    .type('json')
+    .send(`fields *, cover.*, screenshots.*; where id=${id};`)
+    .header('user-key', USER_KEY)
+    .header('Accept', 'application/json')
+    .end(function(result) {
+      if (result.body.length === 0) {
+        result.body = 'Not Found';
+        res.send(result.body);
+      } else {
+        res.send(result.body[0]);
+      }
+    });
+});
 
 app.listen(app.get('port'), function() {
   console.log('Nostalgia Mart backend is running on port ' + app.get('port'));

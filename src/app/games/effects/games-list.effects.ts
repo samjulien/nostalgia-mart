@@ -10,7 +10,7 @@ import { PLATFORMS } from '../models/platforms.dictionary';
 import { of } from 'rxjs';
 
 @Injectable()
-export class GamesEffects {
+export class GamesListEffects {
   setPlatform$ = createEffect(() =>
     this.actions$.pipe(
       ofType(GamesListActions.setPlatform),

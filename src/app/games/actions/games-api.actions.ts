@@ -8,3 +8,8 @@ export const loadGamesSuccess = createAction(
   '[Games API] Load Games Success',
   props<{ games: Game[] }>()
 );
+
+export const selectGameSuccess = createAction(
+  '[Games API] Select Game Success',
+  props<{ game: Game }>()
+);

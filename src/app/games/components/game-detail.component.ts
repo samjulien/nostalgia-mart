@@ -1,14 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Game } from '../models/game';
 
 @Component({
-  selector: 'nm-game-card',
+  selector: 'nm-game-detail',
   template: `
     <mat-card>
       <mat-card-header>
         <div mat-card-avatar [ngStyle]="imageStyles"></div>
         <mat-card-title>
-          <a [routerLink]="['/', game.id]">{{ game.name }}</a>
+          <a [href]="game.url" target="blank">{{ game.name }}</a>
         </mat-card-title>
         <mat-card-subtitle>
           Rating: {{ game.rating | number: '1.0-1' }}
@@ -16,7 +17,7 @@ import { Game } from '../models/game';
       </mat-card-header>
       <img mat-card-image [src]="game.screenshotUrl" />
       <mat-card-content>
-        <p>{{ game.excerpt }}</p>
+        <p>{{ game.summary }}</p>
       </mat-card-content>
     </mat-card>
   `,
@@ -24,6 +25,8 @@ import { Game } from '../models/game';
     `
       :host {
         display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       :host a {
@@ -31,7 +34,7 @@ import { Game } from '../models/game';
       }
 
       mat-card {
-        width: 300px;
+        width: 800px;
         margin: 15px;
         display: flex;
         flex-flow: column;
@@ -70,9 +73,10 @@ import { Game } from '../models/game';
     `,
   ],
 })
-export class GameCardComponent implements OnInit {
+export class GameDetailComponent implements OnInit {
   @Input() game: Game;
   imageStyles = {};
+
   constructor() {}
 
   ngOnInit() {
