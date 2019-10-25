@@ -11,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from '@nostalgia-mart/effects/app.effects';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { AppEffects } from '@nostalgia-mart/effects/app.effects';
       },
     }),
     EffectsModule.forRoot([AppEffects]),
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
