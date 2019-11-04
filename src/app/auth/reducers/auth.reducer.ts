@@ -17,14 +17,22 @@ export const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
-  on(AuthActions.loginSuccess, (state, { payload }) => {
-    const { user, token } = payload;
+  on(AuthActions.loadUserSuccess, (state, { user }) => {
     return {
       ...state,
       user,
-      token,
     };
-  })
+  }),
+  on(
+    AuthActions.checkAuthSuccess,
+    AuthActions.setNotAuthenticated,
+    (state, { isAuthenticated }) => {
+      return {
+        ...state,
+        isAuthenticated,
+      };
+    }
+  )
 );
 
 export const selectUser = (state: State) => state.user;

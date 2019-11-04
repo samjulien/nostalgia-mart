@@ -1,14 +1,28 @@
 import { createAction, props } from '@ngrx/store';
-import { AuthPayload } from '../models/auth-payload';
+
+export const initializeAuth = createAction('[Auth] Initialize auth');
 
 export const logIn = createAction('[Auth] Log in');
 export const logOut = createAction('[Auth] Log out');
+
 export const handleRedirect = createAction('[Auth] Handle redirct');
-export const loginSuccess = createAction(
-  '[Auth] Log in success',
-  props<{ payload: AuthPayload }>()
+export const handleRedirectSuccess = createAction(
+  '[Auth] Handle redirect success',
+  props<{ targetRoute: string }>()
 );
-export const loginError = createAction(
-  '[Auth] Log in error',
-  props<{ error: string }>()
+
+export const loadUser = createAction('[Auth] Load user');
+export const loadUserSuccess = createAction(
+  '[Auth] Load user success',
+  props<{ user: any }>()
+);
+
+export const checkAuth = createAction('[Auth] Check auth');
+export const checkAuthSuccess = createAction(
+  '[Auth] Check auth success',
+  props<{ isAuthenticated: boolean }>()
+);
+export const setNotAuthenticated = createAction(
+  '[Auth] Not authenticated',
+  props<{ isAuthenticated: boolean }>()
 );

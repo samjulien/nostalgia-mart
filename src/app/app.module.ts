@@ -12,6 +12,7 @@ import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from '@nostalgia-mart/effects/app.effects';
 import { AuthModule } from './auth/auth.module';
+import { MaterialModule } from './material';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { AuthModule } from './auth/auth.module';
     AppRoutingModule,
     GamesModule,
     CoreModule,
+    MaterialModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
