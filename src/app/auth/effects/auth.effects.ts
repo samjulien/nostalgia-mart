@@ -44,7 +44,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.logIn),
         tap(() => {
-          this.authService.login();
+          this.authService.login(`${window.location.pathname}`);
         })
       ),
     { dispatch: false }
@@ -54,9 +54,12 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.loadUser, AuthActions.checkAuthSuccess),
       exhaustMap(() =>
-        this.authService
-          .getUser$()
-          .pipe(map(user => AuthActions.loadUserSuccess({ user })))
+        this.authService.getUser$().pipe(
+          map(user => {
+            console.log(JSON.stringify(user, null, 2));
+            return AuthActions.loadUserSuccess({ user });
+          })
+        )
       )
     )
   );

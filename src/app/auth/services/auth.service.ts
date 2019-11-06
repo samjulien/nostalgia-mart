@@ -39,7 +39,7 @@ export class AuthService {
   login(redirectPath: string = '/') {
     this.auth0Client$.subscribe((client: Auth0Client) => {
       client.loginWithRedirect({
-        redirect_uri: `${window.location.origin}${window.location.pathname}`,
+        redirect_uri: `${window.location.origin}`,
         appState: { target: redirectPath },
       });
     });

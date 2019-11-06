@@ -9,8 +9,10 @@ import {
 } from '@nostalgia-mart/games/components';
 import {
   GamesContainerComponent,
+  GamesHomeComponent,
   ViewGameComponent,
   SelectedGameComponent,
+  CollectionContainerComponent,
 } from '@nostalgia-mart/games/containers';
 import { GamesRoutingModule } from '@nostalgia-mart/games/games-routing.module';
 import { MaterialModule } from '@nostalgia-mart/material';
@@ -25,6 +27,8 @@ import { GamesListEffects, GameEffects } from '@nostalgia-mart/games/effects';
     ViewGameComponent,
     SelectedGameComponent,
     GameDetailComponent,
+    GamesHomeComponent,
+    CollectionContainerComponent,
   ],
   imports: [
     CommonModule,

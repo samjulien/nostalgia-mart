@@ -1,20 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
-  GamesContainerComponent,
   ViewGameComponent,
+  GamesHomeComponent,
+  CollectionContainerComponent,
 } from '@nostalgia-mart/games/containers';
 
 export const routes: Routes = [
   {
     path: '',
-    component: GamesContainerComponent,
+    component: GamesHomeComponent,
     data: { title: 'Games' },
   },
   {
     path: ':id',
     component: ViewGameComponent,
     data: { title: 'Game' },
+  },
+  {
+    path: 'collection',
+    component: CollectionContainerComponent,
+    data: { title: 'Games Collection' },
   },
 ];
 

@@ -30,6 +30,12 @@ export class VideoGamesService {
       .pipe(map(game => this.addFields(game)));
   }
 
+  getCollection(userId: number): Observable<Game[]> {
+    return this.http
+      .get<Game[]>(`${this.API_URL}/collection/${userId}`)
+      .pipe(map(games => games.map(g => this.addFields(g))));
+  }
+
   addFields(game) {
     game.excerpt = game.summary
       ? game.summary.substring(0, 200) + '...'

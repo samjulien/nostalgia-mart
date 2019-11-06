@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var unirest = require('unirest');
 var app = express();
+var collection = require('./collection');
 
 var env = require('./environment');
 
@@ -73,6 +74,40 @@ app.get('/api/games/:id', function(req, res) {
         res.send(result.body);
       } else {
         res.send(result.body[0]);
+      }
+    });
+});
+
+// TODO: Protect with JWTs
+app.get('/api/collection/:id', function(req, res) {
+  const id = +req.params.id;
+  console.log(id);
+  console.log(`collection: ${collection}`);
+  userCollectionGameIds = collection
+    .filter(game => {
+      console.log(game);
+      if (game.userId === id) {
+        return game;
+      }
+    })
+    .map(game => game.gameId)
+    .join(',');
+  console.log(userCollectionGameIds);
+
+  unirest
+    .post(`${IDBG_ROOT}/games`)
+    .type('json')
+    .send(
+      `fields *, cover.*, screenshots.*; where id=(${userCollectionGameIds});`
+    )
+    .header('user-key', USER_KEY)
+    .header('Accept', 'application/json')
+    .end(function(result) {
+      if (result.body.length === 0) {
+        result.body = 'Not Found';
+        res.send(result.body);
+      } else {
+        res.send(result.body);
       }
     });
 });
