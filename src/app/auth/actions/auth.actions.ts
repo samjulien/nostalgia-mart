@@ -3,7 +3,9 @@ import { createAction, props } from '@ngrx/store';
 export const initializeAuth = createAction('[Auth] Initialize auth');
 
 export const logIn = createAction('[Auth] Log in');
-export const logOut = createAction('[Auth] Log out');
+export const logOut = createAction(
+  '[Auth] Log out'
+);
 
 export const handleRedirect = createAction('[Auth] Handle redirct');
 export const handleRedirectSuccess = createAction(

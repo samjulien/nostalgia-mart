@@ -56,7 +56,6 @@ export class AuthEffects {
       exhaustMap(() =>
         this.authService.getUser$().pipe(
           map(user => {
-            console.log(JSON.stringify(user, null, 2));
             return AuthActions.loadUserSuccess({ user });
           })
         )
